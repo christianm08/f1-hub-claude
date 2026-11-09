@@ -6,6 +6,7 @@ import { MButton, MCard, MDivider, MIcon, MSegmentedButton, MSelect, MSwitch, us
 import { PageHead, usePageTitle } from '../components/ui'
 import { useSeasons } from '../components/SeasonSelect'
 import type { ReactNode } from 'react'
+import { useInstallPrompt } from '../hooks/useInstallPrompt'
 
 function Row({ label, hint, children }: { label: string; hint?: string; children: ReactNode }) {
   return (
@@ -25,6 +26,7 @@ export default function Settings() {
   const toast = useToast()
   usePageTitle(t('settings.title'))
   const seasons = useSeasons()
+  const pwa = useInstallPrompt()
   const lists = useApi(async () => {
     const [d, c] = await Promise.all([jolpica.drivers(s.season), jolpica.constructors(s.season)])
     return { d, c }
@@ -73,6 +75,19 @@ export default function Settings() {
               </div>
             )}
           </div>
+        </MCard>
+
+        <MCard title={t('settings.app')}>
+          {pwa.standalone ? (
+            <p className="row m3-body-medium" style={{ margin: 0 }}><MIcon name="check_circle" style={{ color: 'var(--f1-flag-green)' }} />{t('settings.installed')}</p>
+          ) : pwa.canInstall ? (
+            <div className="stack">
+              <p className="m3-body-medium m3-muted" style={{ margin: 0 }}>{t('settings.installHint')}</p>
+              <div><MButton variant="brand" icon="download" onClick={async () => { if (await pwa.install()) toast(t('settings.installed')) }}>{t('settings.install')}</MButton></div>
+            </div>
+          ) : (
+            <p className="m3-body-medium m3-muted" style={{ margin: 0 }}>{pwa.ios ? t('settings.installIos') : t('settings.installOther')}</p>
+          )}
         </MCard>
 
         <MCard title={t('settings.live')}>

@@ -14,7 +14,7 @@ npm run preview
 npm run lint     # oxlint
 ```
 
-Nessun backend, nessun database, nessuna API key. Routing con `HashRouter`, quindi funziona da qualsiasi hosting statico. Deploy su Vercel con integrazione GitHub: ogni push su `main` crea un deployment di produzione.
+Nessun backend, nessun database, nessuna API key. Installabile come app (PWA). Routing con `HashRouter`, quindi funziona da qualsiasi hosting statico. Deploy su Vercel con integrazione GitHub: ogni push su `main` crea un deployment di produzione.
 
 ## Pagine
 
@@ -27,7 +27,7 @@ Nessun backend, nessun database, nessuna API key. Routing con `HashRouter`, quin
 | `/piloti`, `/piloti/:driverId` | Lista per classifica; statistiche, grafico punti, gara per gara |
 | `/team`, `/team/:constructorId` | Lista team; statistiche, piloti, punti per GP, gara per gara |
 | `/circuiti` | Schede con tracciato, coordinate, vincitori recenti |
-| `/classifiche` | Piloti e costruttori, 2014 → oggi |
+| `/classifiche` | Piloti e costruttori, 2014 → oggi, con grafico dell'evoluzione dei punti gara dopo gara |
 | `/live` | Race Center: replay completo delle sessioni dal 2023 |
 | `/news` | Aggregatore RSS per categoria |
 | `/impostazioni` | Tema, lingua, stagione, unità, preferiti, auto-refresh, notifiche (solo UI), cache, fonti |
@@ -48,7 +48,7 @@ Regola d'onestà: se un dato non esiste o una fonte non risponde, l'app mostra l
 ## Immagini, tracciati e licenze
 
 - **Tracciati**: geometrie da [bacinger/f1-circuits](https://github.com/bacinger/f1-circuits), MIT License, Copyright (c) 2019-2025 Tomislav Bacinger (vedi `LICENSE-f1-circuits.md`). Repository non ufficiale, non affiliato alle società della Formula 1. La lunghezza del circuito mostrata viene dallo stesso dataset. Generati con `scripts/build-tracks.py`.
-- **Foto piloti e loghi team**: risoluzione a 3 livelli in `src/api/photos.ts`: (1) mappa curata `src/data/assets.ts`, (2) immagine infobox dell'articolo Wikipedia accettata **solo se ospitata su Wikimedia Commons** (Commons ospita esclusivamente file con licenza libera; i file locali non liberi di en.wikipedia vengono scartati), (3) placeholder. La mappa curata è vuota in questa versione: vanno aggiunti solo file con licenza verificata singolarmente.
+- **Foto piloti e loghi team**: risoluzione in `src/api/photos.ts`. Candidati deterministici dall'articolo Wikipedia di Jolpica (immagine infobox e Wikidata P18 per i ritratti, Wikidata P154 per i loghi), accettati solo se ospitati su Wikimedia Commons. Ogni file viene poi **verificato singolarmente** sulle API di Commons (`extmetadata`): si usa solo se la licenza è CC BY, CC BY-SA, CC0 o pubblico dominio (escluse NC/ND), e la pagina mostra autore e licenza con link al file. Altrimenti placeholder. La mappa curata `src/data/assets.ts` serve solo a forzare un file specifico.
 - **Foto monoposto**: solo dalla mappa curata per stagione esatta; altrimenti un fallback grafico in tinta team (non spacciato per foto).
 - **Bandiere**: [flag-icons](https://github.com/lipis/flag-icons), MIT (`src/assets/flags/LICENSE-flag-icons`).
 - **Icone**: [Material Symbols](https://fonts.google.com/icons), Apache License 2.0, SVG inline in `src/design/icons.tsx`.
@@ -57,10 +57,14 @@ Regola d'onestà: se un dato non esiste o una fonte non risponde, l'app mostra l
 
 F1®, FORMULA 1 e marchi correlati appartengono a Formula One Licensing B.V. App non ufficiale, a scopo informativo.
 
+## App installabile (PWA)
+
+`public/manifest.webmanifest`, icone in `public/icons/` (grafica originale) e service worker `public/sw.js`, registrato solo in produzione. L'interfaccia si apre anche offline dopo la prima visita; le risposte delle API dati **non** vengono messe in cache dal service worker (lo fa l'app con i suoi TTL), quindi offline si vedono solo dati già scaricati o un messaggio onesto. In Impostazioni c'è il pulsante "Installa l'app" (Chrome/Edge/Android) e le istruzioni per iPhone.
+
 ## Design system
 
 Token Material 3 generati dal seed rosso racing `#E10600` con `@material/material-color-utilities` (`scripts/gen-tokens.mjs`): accenti dallo schema Fidelity, neutri freddi per le superfici; 64/64 coppie di testo verificate WCAG AA. Typescale completa, shape espressive, elevation 0–5, state layer, motion, layer glass (`src/design/glass.css`). `prefers-reduced-motion` rispettato.
 
 ## Non implementato (di proposito)
 
-Notifiche push reali (serve un backend), dati circuito estesi (curve, record), telemetria live sul piano gratuito, confronto testa a testa tra piloti su stagione, PWA/offline completo.
+Notifiche push reali (serve un backend), dati circuito estesi (curve, record), telemetria live sul piano gratuito, confronto testa a testa tra piloti su stagione, dati offline oltre a quelli già in cache.

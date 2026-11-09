@@ -1,10 +1,10 @@
 // Asset curati a mano. Regola: ogni voce deve avere licenza libera verificata singolarmente
 // su Wikimedia Commons (CC BY / CC BY-SA / CC0 / pubblico dominio) PRIMA di essere aggiunta.
 //
-// Stato attuale: le mappe sono vuote di proposito. In questa build non è stato possibile
-// verificare file per file le licenze su Commons, quindi non si inseriscono nomi di file non
-// verificati. La risoluzione passa al livello 2 (miniatura infobox Wikipedia, accettata SOLO
-// se ospitata su Commons, quindi con licenza libera) e poi al placeholder.
+// Stato attuale: le mappe sono vuote. Le immagini arrivano dal livello 2 di photos.ts, che verifica
+// la licenza di ogni singolo file sulle API di Wikimedia Commons al momento dell'uso (accetta solo
+// CC BY / CC BY-SA / CC0 / pubblico dominio) e mostra autore e licenza. Una voce qui sotto serve
+// solo a forzare una foto specifica (es. stile più coerente), sempre con licenza verificata.
 //
 // Formato per aggiungere una voce verificata:
 //   DRIVER_PHOTOS['max_verstappen'] = { file: 'Nome_file.jpg', license: 'CC BY-SA 4.0', focal: '50% 25%' }

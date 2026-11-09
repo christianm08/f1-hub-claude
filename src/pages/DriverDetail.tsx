@@ -7,7 +7,7 @@ import { useSettings } from '../store/settings'
 import { MButton, MCard, MEmptyState, MFavButton, MBadge } from '../design'
 import { Async, Nat, PageHead, PageSkeleton, Pos, SkeletonList, SrcVal, TeamBar, fmtDate, usePageTitle } from '../components/ui'
 import { SeasonSelect } from '../components/SeasonSelect'
-import { DriverPhoto } from '../components/DriverPhoto'
+import { DriverPhoto, PhotoCredit } from '../components/DriverPhoto'
 import { Sparkline } from '../components/charts'
 import { ResponsiveTable } from '../components/ResponsiveTable'
 import { natInfo, teamColor } from '../data/meta'
@@ -66,6 +66,7 @@ export default function DriverDetail() {
                       <MFavButton active={isFavorite('driver', driver.driverId)} onToggle={() => toggleFavorite({ kind: 'driver', id: driver.driverId, name: driverName(driver), season })} labelOn={t('common.removeFav')} labelOff={t('common.addFav')} />
                     </div>
                     <span className="row row--wrap m3-body-medium"><Nat nationality={driver.nationality} />{driver.nationality} · {nat.code}{team && <><TeamBar id={team.constructorId} />{team.name}</>}</span>
+                    <PhotoCredit driverId={driver.driverId} wikiUrl={driver.url} />
                   </div>
                 </div>
               </section>

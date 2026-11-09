@@ -1,14 +1,14 @@
 import { Link, useSearchParams } from 'react-router-dom'
-import { jolpica, driverName } from '../api/jolpica'
+import { jolpica, driverName, pointsProgression } from '../api/jolpica'
 import { useApi } from '../hooks/useApi'
 import { useSeasonParam } from '../hooks/useSeasonParam'
 import { useSettings } from '../store/settings'
-import { MCard, MTabs } from '../design'
+import { MCard, MSkeleton, MTabs } from '../design'
 import { Async, DriverLink, Nat, PageHead, Pos, SkeletonList, TeamBar, usePageTitle } from '../components/ui'
 import { SeasonSelect } from '../components/SeasonSelect'
 import { ResponsiveTable } from '../components/ResponsiveTable'
 import { DriverPhoto } from '../components/DriverPhoto'
-import { BarList } from '../components/charts'
+import { BarList, LineChart } from '../components/charts'
 import { teamColor } from '../data/meta'
 
 type Tab = 'drivers' | 'constructors'
@@ -21,6 +21,11 @@ export default function Standings() {
   const tab: Tab = params.get('tab') === 'constructors' ? 'constructors' : 'drivers'
   const ds = useApi(() => jolpica.driverStandings(season), [season])
   const cs = useApi(() => jolpica.constructorStandings(season), [season], tab === 'constructors')
+  // risultati di tutta la stagione (gare + sprint) per il grafico dell'evoluzione
+  const all = useApi(async () => {
+    const [races, sprints] = await Promise.all([jolpica.seasonResults(season), jolpica.seasonSprint(season).catch(() => [])])
+    return { races, sprints }
+  }, [season])
 
   return (
     <div className="page">
@@ -31,6 +36,7 @@ export default function Standings() {
         onChange={(v) => setParams((p) => { const n = new URLSearchParams(p); n.set('tab', v); return n }, { replace: true })}
         tabs={[{ id: 'drivers', label: t('standings.drivers'), icon: 'person' }, { id: 'constructors', label: t('standings.constructors'), icon: 'groups' }]}
       />
+      <Progression kind={tab === 'drivers' ? 'driver' : 'team'} all={all.data} order={tab === 'drivers' ? (ds.data ?? []).map((r) => ({ id: r.Driver.driverId, team: r.Constructors.at(-1)?.constructorId ?? '' })) : (cs.data ?? []).map((r) => ({ id: r.Constructor.constructorId, team: r.Constructor.constructorId }))} />
       {tab === 'drivers' ? (
         <MCard>
           <Async state={ds} skeleton={<SkeletonList rows={14} />} isEmpty={(d) => !d.length} emptyTitle={t('standings.none')}>
@@ -88,5 +94,28 @@ export default function Standings() {
         </Async>
       )}
     </div>
+  )
+}
+
+function Progression({ kind, all, order }: { kind: 'driver' | 'team'; all?: { races: Parameters<typeof pointsProgression>[0]; sprints: Parameters<typeof pointsProgression>[1] }; order: { id: string; team: string }[] }) {
+  const { t } = useSettings()
+  if (!all || !order.length) return <MCard title={t('standings.progression')}><MSkeleton h={260} r={16} /></MCard>
+  if (all.races.length < 2) return null
+  const { labels, series } = pointsProgression(all.races, all.sprints, kind)
+  const byId = new Map(series.map((s) => [s.id, s]))
+  const used = new Set<string>()
+  const top = order.slice(0, 5).flatMap((o) => {
+    const s = byId.get(o.id)
+    if (!s) return []
+    const color = teamColor(o.team)
+    const dashed = used.has(color)
+    used.add(color)
+    return [{ ...s, name: kind === 'driver' ? s.name.split(' ').slice(-1)[0] : s.name, color, dashed }]
+  })
+  return (
+    <MCard title={t('standings.progression')}>
+      <LineChart labels={labels} series={top} ariaLabel={t('standings.progression')} />
+      <p className="note">{t('standings.progressionNote')}</p>
+    </MCard>
   )
 }

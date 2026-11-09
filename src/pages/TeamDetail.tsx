@@ -9,7 +9,7 @@ import { Async, Nat, PageHead, PageSkeleton, Pos, SrcVal, usePageTitle } from '.
 import { SeasonSelect } from '../components/SeasonSelect'
 import { TeamLogo } from '../components/TeamLogo'
 import { CarImage } from '../components/CarImage'
-import { DriverPhoto } from '../components/DriverPhoto'
+import { DriverPhoto, PhotoCredit } from '../components/DriverPhoto'
 import { BarList } from '../components/charts'
 import { ResponsiveTable } from '../components/ResponsiveTable'
 import { teamColor } from '../data/meta'
@@ -61,6 +61,7 @@ export default function TeamDetail() {
                     <div className="stack" style={{ gap: 6 }}>
                       <span className="m3-headline-large" style={{ fontStyle: 'italic' }}>{team.name}</span>
                       <span className="row m3-body-medium"><Nat nationality={team.nationality} />{team.nationality}</span>
+                      <PhotoCredit driverId={team.constructorId} teamId={team.constructorId} wikiUrl={team.url} kind="team" />
                     </div>
                     <MFavButton active={isFavorite('team', team.constructorId)} onToggle={() => toggleFavorite({ kind: 'team', id: team.constructorId, name: team.name, season })} labelOn={t('common.removeFav')} labelOff={t('common.addFav')} />
                   </div>

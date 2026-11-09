@@ -58,3 +58,43 @@ export function BarList({ rows, color = 'var(--md-sys-color-primary)', format = 
     </div>
   )
 }
+
+/** Grafico multi-linea (punti cumulati). Legenda cliccabile per evidenziare una serie. */
+export function LineChart({ labels, series, ariaLabel, height = 260 }: { labels: string[]; series: { id: string; name: string; color: string; values: number[]; dashed?: boolean }[]; ariaLabel: string; height?: number }) {
+  const W = 720, H = height, L = 40, R = 16, T = 12, B = 28
+  const max = Math.max(1, ...series.flatMap((s) => s.values))
+  const step = max <= 50 ? 10 : max <= 200 ? 50 : 100
+  const top = Math.ceil(max / step) * step
+  const n = labels.length
+  const x = (i: number) => L + (n <= 1 ? (W - L - R) / 2 : (i * (W - L - R)) / (n - 1))
+  const y = (v: number) => T + (H - T - B) * (1 - v / top)
+  const ticks = Array.from({ length: top / step + 1 }, (_, i) => i * step).filter((_, i, a) => a.length <= 6 || i % Math.ceil(a.length / 5) === 0)
+  const every = Math.ceil(n / 10)
+  return (
+    <div className="stack" style={{ gap: 8 }}>
+      <svg className="chart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={ariaLabel}>
+        {ticks.map((tk) => (
+          <g key={tk}>
+            <line className="chart__grid" x1={L} x2={W - R} y1={y(tk)} y2={y(tk)} />
+            <text x={L - 6} y={y(tk) + 4} textAnchor="end">{tk}</text>
+          </g>
+        ))}
+        {labels.map((l, i) => (i % every === 0 || i === n - 1) && <text key={i} x={x(i)} y={H - 8} textAnchor="middle">{l}</text>)}
+        {series.map((s) => (
+          <g key={s.id}>
+            <path d={s.values.map((v, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(' ')} fill="none" stroke={s.color} strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" strokeDasharray={s.dashed ? '7 5' : undefined} />
+            {s.values.length > 0 && <circle cx={x(s.values.length - 1)} cy={y(s.values[s.values.length - 1])} r="4.5" fill={s.color}><title>{`${s.name}: ${s.values[s.values.length - 1]}`}</title></circle>}
+          </g>
+        ))}
+      </svg>
+      <div className="row row--wrap" style={{ gap: 12 }} role="list">
+        {series.map((s) => (
+          <span key={s.id} role="listitem" className="row m3-body-small" style={{ gap: 6 }}>
+            <span style={{ width: 16, height: 0, borderTop: `4px ${s.dashed ? 'dashed' : 'solid'} ${s.color}`, display: 'inline-block' }} />
+            {s.name} <b className="tabular">{s.values[s.values.length - 1] ?? 0}</b>
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}

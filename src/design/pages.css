@@ -188,3 +188,6 @@
 .subscription { border-radius: var(--md-sys-shape-hero); padding: var(--sp-6); background: linear-gradient(160deg, color-mix(in srgb, var(--md-sys-color-tertiary-container) 70%, transparent), var(--md-sys-color-surface-container-low)); display: grid; gap: var(--sp-3); }
 .subscription h2 { margin: 0; }
 .subscription p { margin: 0; }
+
+.photo-credit { margin: 0; max-width: 60ch; }
+.photo-credit a { color: inherit; text-decoration: underline dotted; }

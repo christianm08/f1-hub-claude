@@ -217,6 +217,12 @@ export const jolpica = {
     return mergeRaces(races as unknown as Race[], 'Results')
   },
 
+  /** tutti i risultati sprint di una stagione (paginati) */
+  async seasonSprint(season: string | number): Promise<Race[]> {
+    const races = await getAll<RaceTable, 'RaceTable'>(`${season}/sprint.json`, (d) => d.RaceTable.Races, ttlFor(season))
+    return mergeRaces(races as unknown as Race[], 'SprintResults')
+  },
+
   /** vincitori di ogni GP della stagione (solo P1: una richiesta) */
   async seasonWinners(season: string | number): Promise<Race[]> {
     return (await get<RaceTable>(`${season}/results/1.json`, ttlFor(season))).RaceTable.Races
@@ -323,4 +329,34 @@ export function resultFlag(r: RaceResult): 'DSQ' | 'DNS' | 'DNF' | null {
 
 export function isFinished(r: RaceResult) {
   return /^\d+$/.test(r.positionText) && (r.status === 'Finished' || /^\+\d+ Laps?$/.test(r.status) || r.status === 'Lapped')
+}
+
+export interface ProgressionSeries { id: string; name: string; color?: string; values: number[] }
+
+/**
+ * Punti cumulati gara dopo gara, calcolati dai risultati reali (gare + sprint) di Jolpica.
+ * Restituisce le etichette dei round e una serie per pilota/team. Nessun dato stimato.
+ */
+export function pointsProgression(races: Race[], sprints: Race[], kind: 'driver' | 'team') {
+  const rounds = races.map((r) => r.round)
+  const totals = new Map<string, { name: string; values: number[]; acc: number }>()
+  const sprintBy = new Map(sprints.map((s) => [s.round, s.SprintResults ?? []]))
+  rounds.forEach((round, i) => {
+    const race = races[i]
+    const rows = [...(race.Results ?? []), ...(sprintBy.get(round) ?? [])]
+    const gained = new Map<string, number>()
+    for (const r of rows) {
+      const id = kind === 'driver' ? r.Driver.driverId : r.Constructor.constructorId
+      const name = kind === 'driver' ? `${r.Driver.givenName} ${r.Driver.familyName}` : r.Constructor.name
+      if (!totals.has(id)) totals.set(id, { name, values: Array(i).fill(0), acc: 0 })
+      gained.set(id, (gained.get(id) ?? 0) + Number(r.points))
+    }
+    for (const [id, t] of totals) {
+      t.acc += gained.get(id) ?? 0
+      t.values.push(t.acc)
+    }
+  })
+  const labels = races.map((r) => r.Circuit.Location.country.slice(0, 3).toUpperCase())
+  const series = [...totals.entries()].map(([id, t]) => ({ id, name: t.name, values: t.values }))
+  return { labels, series }
 }
