@@ -1,0 +1,151 @@
+/* Generato da scripts/gen-tokens.mjs — seed #E10600, SchemeFidelity + neutri freddi, WCAG AA 64/64 */
+:root, [data-theme='dark'] {
+  color-scheme: dark;
+  --md-sys-color-primary: #ffb4a8;
+  --md-sys-color-on-primary: #680200;
+  --md-sys-color-primary-container: #e10600;
+  --md-sys-color-on-primary-container: #fff2f0;
+  --md-sys-color-secondary: #ffb4a8;
+  --md-sys-color-on-secondary: #680200;
+  --md-sys-color-secondary-container: #8e1208;
+  --md-sys-color-on-secondary-container: #ff9a8a;
+  --md-sys-color-tertiary: #b4c5ff;
+  --md-sys-color-on-tertiary: #002a77;
+  --md-sys-color-tertiary-container: #0163ff;
+  --md-sys-color-on-tertiary-container: #f4f4ff;
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000a;
+  --md-sys-color-on-error-container: #ffdad6;
+  --md-sys-color-background: #131314;
+  --md-sys-color-on-background: #e4e2e3;
+  --md-sys-color-surface: #131314;
+  --md-sys-color-on-surface: #e4e2e3;
+  --md-sys-color-surface-variant: #474648;
+  --md-sys-color-on-surface-variant: #c8c6c7;
+  --md-sys-color-surface-dim: #131314;
+  --md-sys-color-surface-bright: #39393a;
+  --md-sys-color-surface-container-lowest: #0e0e0f;
+  --md-sys-color-surface-container-low: #1b1b1d;
+  --md-sys-color-surface-container: #1f1f21;
+  --md-sys-color-surface-container-high: #2a2a2b;
+  --md-sys-color-surface-container-highest: #353536;
+  --md-sys-color-outline: #919092;
+  --md-sys-color-outline-variant: #474648;
+  --md-sys-color-inverse-surface: #e4e2e3;
+  --md-sys-color-inverse-on-surface: #303031;
+  --md-sys-color-inverse-primary: #c00500;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-shadow: #000000;
+}
+[data-theme='light'] {
+  color-scheme: light;
+  --md-sys-color-primary: #b30400;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #e10600;
+  --md-sys-color-on-primary-container: #fff2f0;
+  --md-sys-color-secondary: #b02d1e;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #fd644e;
+  --md-sys-color-on-secondary-container: #650100;
+  --md-sys-color-tertiary: #004dcb;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #0163ff;
+  --md-sys-color-on-tertiary-container: #f4f4ff;
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #93000a;
+  --md-sys-color-background: #fbf9fa;
+  --md-sys-color-on-background: #1b1b1d;
+  --md-sys-color-surface: #fbf9fa;
+  --md-sys-color-on-surface: #1b1b1d;
+  --md-sys-color-surface-variant: #e4e2e3;
+  --md-sys-color-on-surface-variant: #474648;
+  --md-sys-color-surface-dim: #dcd9db;
+  --md-sys-color-surface-bright: #fbf9fa;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f5f3f4;
+  --md-sys-color-surface-container: #f0edee;
+  --md-sys-color-surface-container-high: #eae7e9;
+  --md-sys-color-surface-container-highest: #e4e2e3;
+  --md-sys-color-outline: #787778;
+  --md-sys-color-outline-variant: #c8c6c7;
+  --md-sys-color-inverse-surface: #303031;
+  --md-sys-color-inverse-on-surface: #f3f0f1;
+  --md-sys-color-inverse-primary: #ffb4a8;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-shadow: #000000;
+}
+
+/* ───────── Typescale M3 ───────── */
+:root {
+  --md-ref-typeface-brand: 'Roboto Flex', 'Inter', system-ui, sans-serif;
+  --md-ref-typeface-plain: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --md-ref-typeface-mono: ui-monospace, 'SFMono-Regular', 'Roboto Mono', Menlo, monospace;
+  --md-brand-red: #e10600;
+
+  --md-sys-typescale-display-large-size: 57px; --md-sys-typescale-display-large-height: 64px; --md-sys-typescale-display-large-tracking: -0.25px; --md-sys-typescale-display-large-weight: 800;
+  --md-sys-typescale-display-medium-size: 45px; --md-sys-typescale-display-medium-height: 52px; --md-sys-typescale-display-medium-tracking: 0; --md-sys-typescale-display-medium-weight: 800;
+  --md-sys-typescale-display-small-size: 36px; --md-sys-typescale-display-small-height: 44px; --md-sys-typescale-display-small-tracking: 0; --md-sys-typescale-display-small-weight: 800;
+  --md-sys-typescale-headline-large-size: 32px; --md-sys-typescale-headline-large-height: 40px; --md-sys-typescale-headline-large-tracking: 0; --md-sys-typescale-headline-large-weight: 700;
+  --md-sys-typescale-headline-medium-size: 28px; --md-sys-typescale-headline-medium-height: 36px; --md-sys-typescale-headline-medium-tracking: 0; --md-sys-typescale-headline-medium-weight: 700;
+  --md-sys-typescale-headline-small-size: 24px; --md-sys-typescale-headline-small-height: 32px; --md-sys-typescale-headline-small-tracking: 0; --md-sys-typescale-headline-small-weight: 700;
+  --md-sys-typescale-title-large-size: 22px; --md-sys-typescale-title-large-height: 28px; --md-sys-typescale-title-large-tracking: 0; --md-sys-typescale-title-large-weight: 600;
+  --md-sys-typescale-title-medium-size: 16px; --md-sys-typescale-title-medium-height: 24px; --md-sys-typescale-title-medium-tracking: 0.15px; --md-sys-typescale-title-medium-weight: 600;
+  --md-sys-typescale-title-small-size: 14px; --md-sys-typescale-title-small-height: 20px; --md-sys-typescale-title-small-tracking: 0.1px; --md-sys-typescale-title-small-weight: 600;
+  --md-sys-typescale-body-large-size: 16px; --md-sys-typescale-body-large-height: 24px; --md-sys-typescale-body-large-tracking: 0.5px; --md-sys-typescale-body-large-weight: 400;
+  --md-sys-typescale-body-medium-size: 14px; --md-sys-typescale-body-medium-height: 20px; --md-sys-typescale-body-medium-tracking: 0.25px; --md-sys-typescale-body-medium-weight: 400;
+  --md-sys-typescale-body-small-size: 12px; --md-sys-typescale-body-small-height: 16px; --md-sys-typescale-body-small-tracking: 0.4px; --md-sys-typescale-body-small-weight: 400;
+  --md-sys-typescale-label-large-size: 14px; --md-sys-typescale-label-large-height: 20px; --md-sys-typescale-label-large-tracking: 0.1px; --md-sys-typescale-label-large-weight: 600;
+  --md-sys-typescale-label-medium-size: 12px; --md-sys-typescale-label-medium-height: 16px; --md-sys-typescale-label-medium-tracking: 0.5px; --md-sys-typescale-label-medium-weight: 600;
+  --md-sys-typescale-label-small-size: 11px; --md-sys-typescale-label-small-height: 16px; --md-sys-typescale-label-small-tracking: 0.5px; --md-sys-typescale-label-small-weight: 600;
+
+  /* ───────── Shape (expressive) ───────── */
+  --md-sys-shape-corner-none: 0; --md-sys-shape-corner-extra-small: 4px; --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px; --md-sys-shape-corner-large: 16px; --md-sys-shape-corner-extra-large: 28px; --md-sys-shape-corner-full: 999px;
+  --md-sys-shape-card-large: 24px 24px 24px 8px;
+  --md-sys-shape-hero: 32px 32px 32px 10px;
+
+  /* ───────── Elevation 0–5 ───────── */
+  --md-sys-elevation-0: none;
+  --md-sys-elevation-1: 0 1px 2px rgb(0 0 0 / .30), 0 1px 3px 1px rgb(0 0 0 / .15);
+  --md-sys-elevation-2: 0 1px 2px rgb(0 0 0 / .30), 0 2px 6px 2px rgb(0 0 0 / .15);
+  --md-sys-elevation-3: 0 1px 3px rgb(0 0 0 / .30), 0 4px 8px 3px rgb(0 0 0 / .15);
+  --md-sys-elevation-4: 0 2px 3px rgb(0 0 0 / .30), 0 6px 10px 4px rgb(0 0 0 / .15);
+  --md-sys-elevation-5: 0 4px 4px rgb(0 0 0 / .30), 0 8px 12px 6px rgb(0 0 0 / .15);
+
+  /* ───────── State layers ───────── */
+  --md-sys-state-hover: 0.08; --md-sys-state-focus: 0.10; --md-sys-state-pressed: 0.12; --md-sys-state-dragged: 0.16;
+
+  /* ───────── Spacing (griglia 4dp) ───────── */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px; --sp-16: 64px;
+
+  /* ───────── Motion ───────── */
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --md-sys-motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-duration-short1: 50ms; --md-sys-motion-duration-short2: 100ms; --md-sys-motion-duration-short4: 200ms;
+  --md-sys-motion-duration-medium2: 300ms; --md-sys-motion-duration-medium4: 400ms; --md-sys-motion-duration-long2: 500ms;
+
+  /* ───────── Glass (Android next-gen) ───────── */
+  --glass-blur-sm: 10px; --glass-blur: 18px; --glass-blur-lg: 28px; --glass-saturate: 160%;
+  --glass-surface: color-mix(in srgb, var(--md-sys-color-surface-container) 68%, transparent);
+  --glass-surface-strong: color-mix(in srgb, var(--md-sys-color-surface-container-high) 82%, transparent);
+  --glass-border: color-mix(in srgb, var(--md-sys-color-on-surface) 10%, transparent);
+  --glass-highlight: color-mix(in srgb, #fff 6%, transparent);
+  --glass-shadow: 0 10px 30px -8px rgb(0 0 0 / .45);
+  --glass-z-appbar: 40; --glass-z-nav: 50; --glass-z-menu: 70; --glass-z-dialog: 90; --glass-z-toast: 100;
+  --glass-motion: var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-emphasized);
+
+  /* semantici team/gomme/bandiere */
+  --f1-flag-green: #1fa64a; --f1-flag-yellow: #f5c400; --f1-flag-red: #e10600; --f1-flag-sc: #ff9800; --f1-flag-blue: #2f7bff;
+}
+[data-theme='light'] {
+  --glass-highlight: color-mix(in srgb, #fff 55%, transparent);
+  --glass-shadow: 0 10px 30px -10px rgb(20 30 50 / .22);
+  --md-sys-elevation-1: 0 1px 2px rgb(20 30 50 / .14), 0 1px 3px 1px rgb(20 30 50 / .08);
+  --md-sys-elevation-2: 0 1px 2px rgb(20 30 50 / .14), 0 2px 6px 2px rgb(20 30 50 / .08);
+  --md-sys-elevation-3: 0 1px 3px rgb(20 30 50 / .14), 0 4px 8px 3px rgb(20 30 50 / .08);
+}

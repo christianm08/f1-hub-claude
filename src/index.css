@@ -1,0 +1,39 @@
+/* Legacy compat layer: token --* dark-first e classi .nat, .flag-round, .tyre.
+   Il nuovo codice usa SOLO token --md-sys-* e classi m3-*: non aggiungere nuovi usi dei token qui sotto. */
+@import './design/tokens.css';
+@import './design/components.css';
+@import './design/glass.css';
+@import './design/pages.css';
+
+:root, [data-theme='dark'] {
+  --bg: #090d13;
+  --surface: #121924;
+  --text: #f1f4f9;
+  --accent: #e10600;
+}
+[data-theme='light'] {
+  --bg: #f2f4f8;
+  --surface: #ffffff;
+  --text: #0d1526;
+  --accent: #e10600;
+}
+
+/* chip nazionalità: codice paese a 3 lettere in monospace (fallback quando manca la bandiera) */
+.nat {
+  display: inline-flex; align-items: center; justify-content: center; height: 18px; padding: 0 5px; border-radius: 4px; flex: none;
+  font: 700 10px/1 var(--md-ref-typeface-mono); letter-spacing: .5px;
+  background: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-on-surface-variant);
+}
+.flag-round { border-radius: 50%; object-fit: cover; flex: none; }
+
+/* mescole gomme: S rosso, M giallo, H bianco, I verde, W azzurro */
+.tyre {
+  display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; flex: none;
+  font: 800 11px/1 var(--md-ref-typeface-mono); background: #1b1d22; border: 3px solid currentColor;
+}
+.tyre--S { color: #ff3b30; }
+.tyre--M { color: #ffd60a; }
+.tyre--H { color: #f2f2f2; }
+.tyre--I { color: #34c759; }
+.tyre--W { color: #32ade6; }
+.tyre--U { color: #8a8f98; }

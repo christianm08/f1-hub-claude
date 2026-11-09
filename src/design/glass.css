@@ -1,0 +1,29 @@
+/* Layer "Android next-gen": glassmorphism. Tutti i valori dai token --glass-* in tokens.css. */
+
+.glass, .glass-sm, .glass-lg, .glass-nav, .glass-appbar, .glass-menu, .glass-dialog, .glass-panel, .glass-map, .glass-race {
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+}
+.glass-sm { -webkit-backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate)); backdrop-filter: blur(var(--glass-blur-sm)) saturate(var(--glass-saturate)); }
+.glass-lg { -webkit-backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate)); backdrop-filter: blur(var(--glass-blur-lg)) saturate(var(--glass-saturate)); }
+
+/* bottom nav mobile flottante */
+.glass-nav { background: var(--glass-surface-strong); z-index: var(--glass-z-nav); }
+
+/* app bar: trasparente in cima, traslucida su scroll */
+.glass-appbar { background: transparent; border-color: transparent; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; transition: background var(--glass-motion), box-shadow var(--glass-motion), border-color var(--glass-motion); z-index: var(--glass-z-appbar); }
+.glass-appbar.is-scrolled { background: var(--glass-surface); border-color: var(--glass-border); box-shadow: 0 1px 0 var(--glass-border); -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)); backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate)); }
+
+.glass-menu { background: var(--glass-surface-strong); z-index: var(--glass-z-menu); }
+.glass-dialog { background: var(--glass-surface-strong); }
+.glass-panel { border-radius: var(--md-sys-shape-card-large); }
+.glass-map { border-radius: var(--md-sys-shape-hero); overflow: hidden; }
+/* controlli flottanti del Race Center */
+.glass-race { border-radius: var(--md-sys-shape-corner-extra-large); background: var(--glass-surface-strong); }
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass, .glass-sm, .glass-lg, .glass-nav, .glass-appbar.is-scrolled, .glass-menu, .glass-dialog, .glass-panel, .glass-map, .glass-race { background: var(--md-sys-color-surface-container-high); }
+}

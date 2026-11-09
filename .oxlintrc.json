@@ -1,0 +1,6 @@
+{
+  "plugins": ["react", "typescript"],
+  "rules": {
+    "no-restricted-imports": ["error", { "paths": [{ "name": "lucide-react", "message": "Usa MIcon (Material Symbols inline)." }] }]
+  }
+}
